@@ -29,22 +29,23 @@
         cursor: pointer;
     }
 
-    /* Envelope style */
+    /* White envelope style */
     .envelope {
         position: relative;
-        width: 200px;
-        height: 120px;
+        width: 220px;
+        height: 140px;
         margin: 30px auto;
-        background: #ff69b4;
-        border-radius: 10px;
+        background: #ffffff;
+        border: 2px solid #ccc;
+        border-radius: 5px;
         cursor: pointer;
         overflow: hidden;
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        transition: transform 0.3s;
+        transition: transform 0.3s, opacity 0.5s;
     }
 
     .envelope:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 
     .envelope::before {
@@ -54,7 +55,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: #ff1493;
+        background: #ffffff;
         clip-path: polygon(50% 0%, 100% 50%, 0% 50%);
         transition: transform 0.6s ease;
         z-index: 2;
@@ -69,7 +70,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        color: white;
+        color: #ff1493;
+        font-weight: bold;
         font-size: 22px;
         z-index: 1;
         pointer-events: none;
@@ -126,25 +128,29 @@
     <img src="https://i.postimg.cc/Qd1kXcM7/flower-bouquet.png" alt="Flower Bouquet">
 </div>
 
-<!-- Envelope -->
+<!-- White Envelope -->
 <div id="envelope" class="envelope" onclick="openEnvelope()">
     <span>Open Me!</span>
 </div>
 
 <div id="message-container">
-    <img src="616319970_824630547244284_7182682192288483075_n.jpg" alt="Kupal"> <!-- Replace with Kupal's actual image URL -->
+    <img src="616319970_824630547244284_7182682192288483075_n.jpg" alt="Kupal"> <!-- Replace with actual image -->
     <p>Happy 65th Monthsarry, Kupal! 💐❤️</p>
 </div>
 
 <script>
 function openEnvelope() {
     const envelope = document.getElementById('envelope');
-    envelope.classList.add('open'); // animate envelope opening
-    envelope.style.pointerEvents = 'none'; // prevent clicking again
+
+    // Animate envelope opening
+    envelope.classList.add('open');
+
+    // Hide envelope completely after animation
     setTimeout(() => {
+        envelope.style.display = 'none';
         document.getElementById('message-container').style.display = 'block';
         createHearts();
-    }, 600); // wait for envelope open animation
+    }, 600); // wait for flap animation
 }
 
 function createHearts() {
