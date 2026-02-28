@@ -29,23 +29,50 @@
         cursor: pointer;
     }
 
-    button {
+    /* Envelope style */
+    .envelope {
         position: relative;
-        z-index: 2;
-        background-color: #ff69b4;
-        color: white;
-        border: none;
-        padding: 20px 40px;
-        font-size: 22px;
-        border-radius: 15px;
+        width: 200px;
+        height: 120px;
+        margin: 30px auto;
+        background: #ff69b4;
+        border-radius: 10px;
         cursor: pointer;
-        margin-top: 20px;
-        transition: transform 0.3s, background 0.3s;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s;
     }
 
-    button:hover {
-        background-color: #ff1493;
+    .envelope:hover {
         transform: scale(1.1);
+    }
+
+    .envelope::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ff1493;
+        clip-path: polygon(50% 0%, 100% 50%, 0% 50%);
+        transition: transform 0.6s ease;
+        z-index: 2;
+    }
+
+    .envelope.open::before {
+        transform: translateY(-100%);
+    }
+
+    .envelope span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 22px;
+        z-index: 1;
+        pointer-events: none;
     }
 
     #message-container {
@@ -99,7 +126,10 @@
     <img src="https://i.postimg.cc/Qd1kXcM7/flower-bouquet.png" alt="Flower Bouquet">
 </div>
 
-<button id="clickBtn" onclick="showMessage()">Click Me</button>
+<!-- Envelope -->
+<div id="envelope" class="envelope" onclick="openEnvelope()">
+    <span>Open Me!</span>
+</div>
 
 <div id="message-container">
     <img src="616319970_824630547244284_7182682192288483075_n.jpg" alt="Kupal"> <!-- Replace with Kupal's actual image URL -->
@@ -107,17 +137,14 @@
 </div>
 
 <script>
-function showMessage() {
-    // Hide the button after click
-    const button = document.getElementById('clickBtn');
-    button.style.display = 'none';
-
-    // Show the message container with Kupal's image
-    const messageContainer = document.getElementById('message-container');
-    messageContainer.style.display = 'block';
-
-    // Create floating hearts
-    createHearts();
+function openEnvelope() {
+    const envelope = document.getElementById('envelope');
+    envelope.classList.add('open'); // animate envelope opening
+    envelope.style.pointerEvents = 'none'; // prevent clicking again
+    setTimeout(() => {
+        document.getElementById('message-container').style.display = 'block';
+        createHearts();
+    }, 600); // wait for envelope open animation
 }
 
 function createHearts() {
@@ -139,4 +166,3 @@ function createHearts() {
 
 </body>
 </html>
-
