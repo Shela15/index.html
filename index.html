@@ -4,67 +4,71 @@
     <title>For My Love 💖</title>
     <style>
         body {
-            background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to top, #ff9a9e, #fad0c4);
             text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             overflow: hidden;
         }
 
         h1 {
-            margin-top: 50px;
-            color: #fff;
-            font-size: 40px;
+            margin-top: 40px;
+            color: white;
+            font-size: 35px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px white; }
+            to { text-shadow: 0 0 25px red; }
         }
 
         .flower {
             position: relative;
             margin: 100px auto;
-            width: 150px;
-            height: 150px;
-            animation: float 3s ease-in-out infinite;
+            width: 200px;
+            height: 200px;
         }
 
         .petal {
-            width: 70px;
-            height: 70px;
-            background: pink;
+            width: 90px;
+            height: 90px;
+            background: hotpink;
             border-radius: 50%;
             position: absolute;
+            opacity: 0.9;
         }
 
-        .petal:nth-child(1) { top: 0; left: 40px; }
-        .petal:nth-child(2) { top: 40px; left: 0; }
-        .petal:nth-child(3) { top: 40px; right: 0; }
-        .petal:nth-child(4) { bottom: 0; left: 40px; }
+        .petal:nth-child(1) { top: 0; left: 55px; }
+        .petal:nth-child(2) { top: 55px; left: 0; }
+        .petal:nth-child(3) { top: 55px; right: 0; }
+        .petal:nth-child(4) { bottom: 0; left: 55px; }
 
         .center {
-            width: 70px;
-            height: 70px;
+            width: 100px;
+            height: 100px;
             background: yellow;
             border-radius: 50%;
             position: absolute;
-            top: 40px;
-            left: 40px;
+            top: 50px;
+            left: 50px;
         }
 
         button {
             padding: 12px 25px;
             font-size: 18px;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             background: red;
             color: white;
             cursor: pointer;
+            transition: 0.3s;
         }
 
         button:hover {
             background: darkred;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+            transform: scale(1.1);
         }
 
         .message {
@@ -73,32 +77,61 @@
             color: white;
             margin-top: 20px;
         }
+
+        .petals-fall {
+            position: absolute;
+            top: -50px;
+            color: pink;
+            font-size: 25px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h1>💐 A Flower For You 💐</h1>
+<h1>💐 A Flower For You 💐</h1>
 
-    <div class="flower">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="center"></div>
-    </div>
+<div class="flower">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="center"></div>
+</div>
 
-    <button onclick="showMessage()">Click Me ❤️</button>
+<button onclick="showMessage()">Click My Love ❤️</button>
 
-    <div class="message" id="loveMessage">
-        I love you so much! 🌹  
-        You make my life beautiful 💖
-    </div>
+<div class="message" id="loveMessage">
+    You are my favorite person in the world 🌎💖  
+    I love you forever 💕
+</div>
 
-    <script>
-        function showMessage() {
-            document.getElementById("loveMessage").style.display = "block";
-        }
-    </script>
+<script>
+function showMessage() {
+    document.getElementById("loveMessage").style.display = "block";
+}
+
+function createPetal() {
+    const petal = document.createElement("div");
+    petal.classList.add("petals-fall");
+    petal.innerHTML = "🌸";
+    petal.style.left = Math.random() * window.innerWidth + "px";
+    petal.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(petal);
+
+    setTimeout(() => {
+        petal.remove();
+    }, 5000);
+}
+
+setInterval(createPetal, 300);
+</script>
 
 </body>
 </html>
