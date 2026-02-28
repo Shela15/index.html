@@ -95,6 +95,7 @@
         object-fit: cover;
         margin-bottom: 20px;
         border: 3px solid #ff1493;
+        cursor: pointer; /* added pointer cursor */
     }
 
     #message-container p {
@@ -120,6 +121,20 @@
         0% { transform: translateY(0) scale(1); opacity: 1; }
         100% { transform: translateY(-600px) scale(1.2); opacity: 0; }
     }
+
+    /* Floating "kantot" text */
+    .floating-text {
+        position: absolute;
+        color: red;
+        font-size: 24px;
+        animation: floatText 3s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes floatText {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-600px) scale(1.2); opacity: 0; }
+    }
 </style>
 </head>
 <body>
@@ -134,7 +149,7 @@
 </div>
 
 <div id="message-container">
-    <img src="616319970_824630547244284_7182682192288483075_n.jpg" alt="Kupal"> <!-- Replace with actual image -->
+    <img src="616319970_824630547244284_7182682192288483075_n.jpg" alt="Kupal" onclick="spawnText()">
     <p>Happy 65th Monthsarry, Kupal! 💐❤️</p>
 </div>
 
@@ -166,6 +181,22 @@ function createHearts() {
         setTimeout(() => {
             heart.remove();
         }, 3000);
+    }
+}
+
+// NEW FEATURE: floating "kantot" text when image is clicked
+function spawnText() {
+    for (let i = 0; i < 30; i++) {
+        const text = document.createElement('div');
+        text.className = 'floating-text';
+        text.innerText = 'kantot';
+        text.style.left = Math.random() * window.innerWidth + 'px';
+        text.style.top = Math.random() * window.innerHeight + 'px';
+        text.style.fontSize = (10 + Math.random() * 30) + 'px';
+        text.style.animationDuration = (2 + Math.random() * 3) + 's';
+        document.body.appendChild(text);
+
+        setTimeout(() => text.remove(), 5000); // remove after 5 seconds
     }
 }
 </script>
